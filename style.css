@@ -263,6 +263,14 @@ section.play-here-container .buttons button{
 }
 
 section.play-here-container .buttons .next{
+    display: block;
+}
+
+section.play-here-container .buttons .rumbleWord{
+    display: none;
+}
+
+section.play-here-container .inputSubmit .submitAnswer{
     display: none;
 }
 
@@ -279,19 +287,20 @@ section.play-here-container .information {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 10px;
     width: 90%;
-    margin: 20px;
 }
 
 section.play-here-container .hint {
-    color: rgb(255, 68, 68);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    color: rgb(255, 52, 52);
     letter-spacing: 1px;
     font-size: 20px;
     font-style: italic;
 }
 
 section.play-here-container .moreInfo {
+    font-family: 'Poppins', sans-serif;
     letter-spacing: 0.5px;
     font-size: 20px;
     color: rgb(0, 0, 0)
@@ -300,6 +309,7 @@ section.play-here-container .moreInfo {
 section.play-here-container .moreInfo::first-letter {
     font-size: 50px;
     padding-right: 2px;
+    font-weight: 500;
 }
 
 section.play-here-container .moreInfo:hover {

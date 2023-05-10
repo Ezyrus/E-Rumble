@@ -29,16 +29,16 @@ const correct_words_list = [
     "PHOTOSYNTHESIS",
 ];
 const hint_word_list = [
-    "Explores chemical processes related to living organisms.",
-    "Study of everything in the universe",
-    "The science and study of quality, structure, space, and change. ",
-    "Natural science discipline that studies living things.",
-    "Concerned with fossil animals and plants.",
-    "Biology that studies the animal kingdom",
-    "The study of what makes us human",
-    "The study of plants",
-    "The smallest unit of matter that retains the properties of an element",
-    "The process by which plants convert light energy into chemical energy"
+    "HINT: Explores chemical processes related to living organisms.",
+    "HINT: Study of everything in the universe",
+    "HINT: The science and study of quality, structure, space, and change. ",
+    "HINT: Natural science discipline that studies living things.",
+    "HINT: Concerned with fossil animals and plants.",
+    "HINT: Biology that studies the animal kingdom",
+    "HINT: The study of what makes us human",
+    "HINT: The study of plants",
+    "HINT: The smallest unit of matter that retains the properties of an element",
+    "HINT: The process by which plants convert light energy into chemical energy"
 ]
 const more_info = [
     "Biochemistry combines biology and chemistry to study living matter. It powers scientific and medical discovery in fields such as pharmaceuticals, forensics and nutrition. With biochemistry, you will study chemical reactions at a molecular level to better understand the world and develop new ways to harness these.",
@@ -52,62 +52,93 @@ const more_info = [
     "Atoms are the building blocks of all matter, and the properties of different materials are determined by the types and arrangements of atoms that they contain. Atoms can combine with each other to form molecules, which are groups of two or more atoms that are chemically bonded together.",
     "Photosynthesis is the process by which green plants, algae, and some bacteria convert light energy from the sun into chemical energy in the form of organic compounds like glucose. This process is critical to the survival of many living organisms, as it produces the oxygen we breathe and is the foundation of the food chain."
 ];
-
 function randomWords() {
     return Math.floor(Math.random() * words_list.length);
 }
-var random_words_key = randomWords();
 
-var selected_words = words_list[random_words_key];
-selected_words = rumbledWords(selected_words);
+var totalScore = 0;
+var words_count = words_list.length;
+var random_words_key = randomWords(words_list);
+
+var selected_words = rumbledWords(words_list[random_words_key]);
+var right_words = correct_words_list[random_words_key];
+var hint_words = hint_word_list[random_words_key];
 
 submitAnswer.onclick = function () {
-    var userAnswer = document.getElementById("userAnswer").value;
-    var rightAnswer = correct_words_list[random_words_key];
+  var userAnswer = document.getElementById("userAnswer").value.toUpperCase();
+  if (userAnswer == right_words) {
+    totalScore++;
+    moreInfo.innerHTML = more_info[random_words_key];
+    // rumble_btn.style.display = "none";
+    // submitAnswer.style.display = "none";
+  }
 
-    if (userAnswer.toUpperCase() == rightAnswer) {
-        moreInfo.innerHTML = more_info[random_words_key];
+  if (words_count === 0) {
+    var playAgain = confirm(`Your total score is ${totalScore}. Do you want to play again?`);
+    totalScore = 0;
+    if (playAgain) {
+      location.reload();
     } else {
-        shake();
+      location.href = "index.html";
     }
+  } else {
+    words_list.splice(random_words_key, 1);
+    correct_words_list.splice(random_words_key, 1);
+    hint_word_list.splice(random_words_key, 1);
+    more_info.splice(random_words_key, 1);
+    words_count--;
+    random_words_key = randomWords(words_list);
+    selected_words = rumbledWords(words_list[random_words_key]);
+    right_words = correct_words_list[random_words_key];
+    hint_words = hint_word_list[random_words_key];
+  }
+
+  words.innerHTML = selected_words;
+  hint.innerHTML = hint_words;
+  console.log("Words: " + words_list);
+  console.log("Words Count: " + words_count);
+  console.log("Score:  " + totalScore);
 };
 
 rumble_btn.onclick = function () {
-    var right_words = words_list[random_words_key];
+  selected_words = rumbledWords(selected_words);
+  if (selected_words == right_words) {
     selected_words = rumbledWords(selected_words);
-    var hint_words = hint_word_list[random_words_key];
-
-    rumble_btn.innerHTML = "Rumble Word";
-    next_btn.style.display = "block";
-    if (selected_words == right_words) {
-        selected_words = rumbledWords(selected_words);
-    }
-    words.innerHTML = selected_words;
-    hint.innerHTML = hint_words;
+  }
+  words.innerHTML = selected_words;
 };
 
 next_btn.onclick = function () {
-    random_words_key = randomWords();
-    var right_words = words_list[random_words_key];
-    selected_words = rumbledWords(right_words);
-    var hint_words = hint_word_list[random_words_key];
-    moreInfo.innerHTML = "";
-    if (selected_words == right_words) {
-        selected_words = rumbledWords(selected_words);
-    }
-    words.innerHTML = selected_words;
-    hint.innerHTML = hint_words;
+  random_words_key = randomWords(words_list);
+  selected_words = rumbledWords(words_list[random_words_key]);
+  right_words = correct_words_list[random_words_key];
+  hint_words = hint_word_list[random_words_key];
+  words.innerHTML = selected_words;
+  hint.innerHTML = hint_words;
+  moreInfo.innerHTML = "";
+  next_btn.innerHTML = "Next";
+  rumble_btn.style.display = "block";
+  submitAnswer.style.display = "block";
 };
 
 function rumbledWords(words) {
-    let charArray = words.split("");
-    let newArray = [];
-    while (charArray.length > 0) {
-        let index = Math.floor(Math.random() * charArray.length);
-        newArray.push(charArray[index]);
-        charArray.splice(index, 1);
-    }
-    return newArray.join("");
+    if (!words) {
+        var playAgain = confirm(`Your total score is ${totalScore}. Do you want to play again?`);
+        totalScore = 0;
+        if (playAgain) {
+          location.reload();
+        } else {
+          location.href = "index.html";
+        }
+      }
+  let charArray = words.split("");
+  let newArray = [];
+  while (charArray.length > 0) {
+    let index = Math.floor(Math.random() * charArray.length);
+    newArray.push(charArray[index]);
+    charArray.splice(index, 1);
+  }
+  return newArray.join("");
 }
 
 function shake() {

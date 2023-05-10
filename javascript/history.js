@@ -29,16 +29,16 @@ const correct_words_list = [
     "CHRISTMAS"
 ];
 const hint_word_list = [
-    "Relating to or denoting the period before written records.",
-    "Period of music as ranging from 1730 to 1820.",
-    "Period lasted approximately from the late 5th to the late 15th centuries.",
-    "Spans the period after the Late Middle Ages of the post-classical era.",
-    "Wide span of time marked in part by technological innovations.",
-    "Happens in April 9, 1942",
-    "Happens in June 12",
-    "Happens in December 30",
-    "Happens in November 30",
-    "Happens in December 25",
+    "HINT: Relating to or denoting the period before written records.",
+    "HINT: Period of music as ranging from 1730 to 1820.",
+    "HINT: Period lasted approximately from the late 5th to the late 15th centuries.",
+    "HINT: Spans the period after the Late Middle Ages of the post-classical era.",
+    "HINT: Wide span of time marked in part by technological innovations.",
+    "HINT: Happens in April 9, 1942",
+    "HINT: Happens in June 12",
+    "HINT: Happens in December 30",
+    "HINT: Happens in November 30",
+    "HINT: Happens in December 25",
 ]
 const more_info = [
     "Prehistory, the vast period of time before written records or human documentation, includes the Neolithic Revolution, Neanderthals and Denisovans, Stonehenge, the Ice Age and more.",

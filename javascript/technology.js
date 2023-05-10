@@ -29,16 +29,16 @@ const correct_words_list = [
     "NANOTECHNOLOGY",
 ];
 const hint_word_list = [
-    "Quickly find information, communicate with people around the world.",
-    "The use of physical or behavioral characteristics, such as fingerprints or voice recognition, to identify individuals.",
-    "The use of game design elements, such as points, badges, and leaderboards, to make non-game activities more engaging and enjoyable.",
-    "It is the opposite of hardware.",
-    "Use of machines to perform tasks done traditionally by human beings.",
-    "Used to broadcast programs for entertainment, information, and education. ",
-    "Uses cryptographic hashes to secure transactions and protect data.",
-    "Digital or virtual currency that uses cryptography for security and operates independently of a central bank.",
-    "The process of identifying the physical location of a device or user based on their IP address, GPS coordinates, or other factors.",
-    "The manipulation of matter on an atomic, molecular, or supramolecular scale for the development of new materials, devices, and structures."
+    "HINT: Quickly find information, communicate with people around the world.",
+    "HINT: The use of physical or behavioral characteristics, such as fingerprints or voice recognition, to identify individuals.",
+    "HINT: The use of game design elements, such as points, badges, and leaderboards, to make non-game activities more engaging and enjoyable.",
+    "HINT: It is the opposite of hardware.",
+    "HINT: Use of machines to perform tasks done traditionally by human beings.",
+    "HINT: Used to broadcast programs for entertainment, information, and education. ",
+    "HINT: Uses cryptographic hashes to secure transactions and protect data.",
+    "HINT: Digital or virtual currency that uses cryptography for security and operates independently of a central bank.",
+    "HINT: The process of identifying the physical location of a device or user based on their IP address, GPS coordinates, or other factors.",
+    "HINT: The manipulation of matter on an atomic, molecular, or supramolecular scale for the development of new materials, devices, and structures."
 ]
 const more_info = [
     "Internet is a global network of interconnected computers and servers that communicate with each other using standardized protocols. It provides a platform for users to share information, communicate, and collaborate on a global scale. The internet has become an essential tool for individuals, businesses, and governments, providing access to information, services, and resources.",

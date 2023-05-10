@@ -29,16 +29,16 @@ const correct_words_list = [
   "TAOISM",
 ];
 const hint_word_list = [
-  "Also known as the service and worship of God or the supernatural.",
-  "It teaches that Allah’s word was revealed to the project Muhammad through the angel Gabriel. Their followers are called Muslims",
-  "It belongs to a Christ Centered faith community that views Jesus Christ as the foundation.",
-  "This religion does not celebrate Christmas, Easter, Halloween, Valentine’s Day or any holiday based on pagan beliefs.",
-  "This church believes that original matter, ether, heat, light, electricity, magnetism, gravity and life or reason, are manifestation of the one supreme cause which is God who is life and is the great mover of the Universe.",
-  "It is the religion that based on the teaching of Siddhartha Gautama.",
-  "It is one of the world’s oldest religions and is the oldest religion that is still practiced today.",
-  "They believe that there’s only one God who has established a covenant. Their God communicates to believer through prophets and rewards good deeds while also punishing evil. ",
-  "There is no deity worshipped in this religion, though the worship of ancestors and of Confucius himself as a sage master and teacher are practiced.",
-  "This religion philosophy is based on three pillars. Simplicity, Patience and Compassion.",
+  "HINT: Also known as the service and worship of God or the supernatural.",
+  "HINT: It teaches that Allah’s word was revealed to the project Muhammad through the angel Gabriel. Their followers are called Muslims",
+  "HINT: It belongs to a Christ Centered faith community that views Jesus Christ as the foundation.",
+  "HINT: This religion does not celebrate Christmas, Easter, Halloween, Valentine’s Day or any holiday based on pagan beliefs.",
+  "HINT: This church believes that original matter, ether, heat, light, electricity, magnetism, gravity and life or reason, are manifestation of the one supreme cause which is God who is life and is the great mover of the Universe.",
+  "HINT: It is the religion that based on the teaching of Siddhartha Gautama.",
+  "HINT: It is one of the world’s oldest religions and is the oldest religion that is still practiced today.",
+  "HINT: They believe that there’s only one God who has established a covenant. Their God communicates to believer through prophets and rewards good deeds while also punishing evil. ",
+  "HINT: There is no deity worshipped in this religion, though the worship of ancestors and of Confucius himself as a sage master and teacher are practiced.",
+  "HINT: This religion philosophy is based on three pillars. Simplicity, Patience and Compassion.",
 ];
 const more_info = [
   "Religion is a range of social cultural systems, including designated behaviours and practices, morals, beliefs, worldviews that generally relate humanity to spiritual element.",
