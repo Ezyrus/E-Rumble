@@ -242,6 +242,7 @@ section.play-here-container input{
     width: 30%;
     letter-spacing: 1px;
     font-size: 15px;
+    display: none;
     /* text-transform: capitalize; */
 }
 
@@ -255,6 +256,7 @@ section.play-here-container .buttons{
 }
 
 section.play-here-container .buttons button{
+    background-color: antiquewhite;
     font-size: 20px;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -275,8 +277,13 @@ section.play-here-container .inputSubmit .submitAnswer{
     display: none;
 }
 
+section.play-here-container .inputSubmit .userAnswer{
+    background-color: antiquewhite;
+    display: block;
+}
+
 section.play-here-container .buttons button:hover{
-    transform: scale(1.2);
+    transform: scale(1.1);
     transition: 0.2s;
     background-color: green;
     color: white;
@@ -293,8 +300,8 @@ section.play-here-container .information {
 
 section.play-here-container .hint {
     font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    color: rgb(255, 52, 52);
+    font-weight: 600;
+    color: rgb(255, 0, 157);
     letter-spacing: 1px;
     font-size: 20px;
     font-style: italic;
