@@ -53,6 +53,7 @@ const more_info = [
   "Taoism is a religion that developed a bit after Confucianism, around two thousand years ago. Taoism is mainly concerned with the spiritual elements of life, including the nature of the universe.",
 ];
 
+
 function randomWords() {
   return Math.floor(Math.random() * words_list.length);
 }
@@ -69,19 +70,39 @@ submitAnswer.onclick = function () {
   var userAnswer = document.getElementById("userAnswer").value.toUpperCase();
   if (userAnswer == right_words) {
     totalScore++;
-    moreInfo.innerHTML = more_info[random_words_key];
+    Swal.fire({
+      title: correct_words_list[random_words_key],
+      text: more_info[random_words_key],
+      icon: 'question',
+      confirmButtonText: 'Continue',
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      showCancelButton: false
+    })
+    // moreInfo.innerHTML = more_info[random_words_key];
     // rumble_btn.style.display = "none";
     // submitAnswer.style.display = "none";
+  } else {
+    shake();
   }
 
   if (words_count === 0) {
-    var playAgain = confirm(`Your total score is ${totalScore}. Do you want to play again?`);
-    totalScore = 0;
-    if (playAgain) {
-      location.reload();
-    } else {
-      location.href = "index.html";
-    }
+    Swal.fire({
+      title: `Your total score is ${totalScore}.`,
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'Play Again',
+      cancelButtonText: 'Quit',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Reload the page to play again
+        location.reload();
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Redirect to index page if user quits
+        location.href = "index.html";
+      }
+    });
+
   } else {
     words_list.splice(random_words_key, 1);
     correct_words_list.splice(random_words_key, 1);
@@ -124,13 +145,21 @@ next_btn.onclick = function () {
 
 function rumbledWords(words) {
   if (!words) {
-    var playAgain = confirm(`Your total score is ${totalScore}. Do you want to play again?`);
-    totalScore = 0;
-    if (playAgain) {
-      location.reload();
-    } else {
-      location.href = "index.html";
-    }
+    Swal.fire({
+      title: `Your total score is ${totalScore}.`,
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'Play Again',
+      cancelButtonText: 'Quit',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Reload the page to play again
+        location.reload();
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Redirect to index page if user quits
+        location.href = "index.html";
+      }
+    })
   }
   let charArray = words.split("");
   let newArray = [];

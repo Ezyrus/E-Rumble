@@ -53,63 +53,84 @@ const more_info = [
     "Christmas is an annual festival commemorating the birth of Jesus Christ, observed primarily on December 25 as a religious and cultural celebration among billions of people around the world."
 ];
 
+
 function randomWords() {
     return Math.floor(Math.random() * words_list.length);
-}
-
-var totalScore = 0;
-var words_count = words_list.length;
-var random_words_key = randomWords(words_list);
-
-var selected_words = rumbledWords(words_list[random_words_key]);
-var right_words = correct_words_list[random_words_key];
-var hint_words = hint_word_list[random_words_key];
-
-submitAnswer.onclick = function () {
+  }
+  
+  var totalScore = 0;
+  var words_count = words_list.length;
+  var random_words_key = randomWords(words_list);
+  
+  var selected_words = rumbledWords(words_list[random_words_key]);
+  var right_words = correct_words_list[random_words_key];
+  var hint_words = hint_word_list[random_words_key];
+  
+  submitAnswer.onclick = function () {
     var userAnswer = document.getElementById("userAnswer").value.toUpperCase();
     if (userAnswer == right_words) {
-        totalScore++;
-        moreInfo.innerHTML = more_info[random_words_key];
-        // rumble_btn.style.display = "none";
-        // submitAnswer.style.display = "none";
-    }
-
-    if (words_count === 0) {
-        var playAgain = confirm(`Your total score is ${totalScore}. Do you want to play again?`);
-        totalScore = 0;
-        if (playAgain) {
-            location.reload();
-        } else {
-            location.href = "index.html";
-        }
+      totalScore++;
+      Swal.fire({
+        title: correct_words_list[random_words_key],
+        text: more_info[random_words_key],
+        icon: 'question',
+        confirmButtonText: 'Continue',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showCancelButton: false
+      })
+      // moreInfo.innerHTML = more_info[random_words_key];
+      // rumble_btn.style.display = "none";
+      // submitAnswer.style.display = "none";
     } else {
-        words_list.splice(random_words_key, 1);
-        correct_words_list.splice(random_words_key, 1);
-        hint_word_list.splice(random_words_key, 1);
-        more_info.splice(random_words_key, 1);
-        words_count--;
-        random_words_key = randomWords(words_list);
-        selected_words = rumbledWords(words_list[random_words_key]);
-        right_words = correct_words_list[random_words_key];
-        hint_words = hint_word_list[random_words_key];
+      shake();
     }
-
+  
+    if (words_count === 0) {
+      Swal.fire({
+        title: `Your total score is ${totalScore}.`,
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonText: 'Play Again',
+        cancelButtonText: 'Quit',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Reload the page to play again
+          location.reload();
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          // Redirect to index page if user quits
+          location.href = "index.html";
+        }
+      });
+  
+    } else {
+      words_list.splice(random_words_key, 1);
+      correct_words_list.splice(random_words_key, 1);
+      hint_word_list.splice(random_words_key, 1);
+      more_info.splice(random_words_key, 1);
+      words_count--;
+      random_words_key = randomWords(words_list);
+      selected_words = rumbledWords(words_list[random_words_key]);
+      right_words = correct_words_list[random_words_key];
+      hint_words = hint_word_list[random_words_key];
+    }
+  
     words.innerHTML = selected_words;
     hint.innerHTML = hint_words;
     console.log("Words: " + words_list);
     console.log("Words Count: " + words_count);
     console.log("Score:  " + totalScore);
-};
-
-rumble_btn.onclick = function () {
+  };
+  
+  rumble_btn.onclick = function () {
     selected_words = rumbledWords(selected_words);
     if (selected_words == right_words) {
-        selected_words = rumbledWords(selected_words);
+      selected_words = rumbledWords(selected_words);
     }
     words.innerHTML = selected_words;
-};
-
-next_btn.onclick = function () {
+  };
+  
+  next_btn.onclick = function () {
     random_words_key = randomWords(words_list);
     selected_words = rumbledWords(words_list[random_words_key]);
     right_words = correct_words_list[random_words_key];
@@ -120,35 +141,43 @@ next_btn.onclick = function () {
     next_btn.innerHTML = "Next";
     rumble_btn.style.display = "block";
     submitAnswer.style.display = "block";
-};
-
-function rumbledWords(words) {
+  };
+  
+  function rumbledWords(words) {
     if (!words) {
-        var playAgain = confirm(`Your total score is ${totalScore}. Do you want to play again?`);
-        totalScore = 0;
-        if (playAgain) {
-            location.reload();
-        } else {
-            location.href = "index.html";
+      Swal.fire({
+        title: `Your total score is ${totalScore}.`,
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonText: 'Play Again',
+        cancelButtonText: 'Quit',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Reload the page to play again
+          location.reload();
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          // Redirect to index page if user quits
+          location.href = "index.html";
         }
+      })
     }
     let charArray = words.split("");
     let newArray = [];
     while (charArray.length > 0) {
-        let index = Math.floor(Math.random() * charArray.length);
-        newArray.push(charArray[index]);
-        charArray.splice(index, 1);
+      let index = Math.floor(Math.random() * charArray.length);
+      newArray.push(charArray[index]);
+      charArray.splice(index, 1);
     }
     return newArray.join("");
-}
-
-function shake() {
+  }
+  
+  function shake() {
     words.classList.add("shake");
     submitAnswer.classList.add("shake");
     document.getElementById("userAnswer").classList.add("shake");
     setTimeout(function () {
-        words.classList.remove("shake");
-        submitAnswer.classList.remove("shake");
-        document.getElementById("userAnswer").classList.remove("shake");
+      words.classList.remove("shake");
+      submitAnswer.classList.remove("shake");
+      document.getElementById("userAnswer").classList.remove("shake");
     }, 500);
-}
+  }
