@@ -118,7 +118,7 @@ function randomWords() {
     hint.innerHTML = hint_words;
     console.log("Words: " + words_list);
     console.log("Words Count: " + words_count);
-    console.log("Score:  " + totalScore);
+    console.log("Score:  " + totalScore)
   };
   
   rumble_btn.onclick = function () {
@@ -159,6 +159,7 @@ function randomWords() {
           location.href = "index.html";
         }
       })
+      
     }
     let charArray = words.split("");
     let newArray = [];
