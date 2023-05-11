@@ -1,6 +1,7 @@
 var words = document.getElementById("word");
 var moreInfo = document.getElementById("moreInfo");
 var hint = document.getElementById("hint");
+var inputField = document.getElementById("userAnswer");
 const submitAnswer = document.getElementById("submitAnswer");
 const rumble_btn = document.getElementById("rumbleWord");
 const next_btn = document.getElementById("nextWord");
@@ -53,21 +54,38 @@ const more_info = [
   "Taoism is a religion that developed a bit after Confucianism, around two thousand years ago. Taoism is mainly concerned with the spiritual elements of life, including the nature of the universe.",
 ];
 
+var totalScore = 0;
+var words_count = words_list.length;
+var random_words_key;
 
 function randomWords() {
   return Math.floor(Math.random() * words_list.length);
 }
 
-var totalScore = 0;
-var words_count = words_list.length;
-var random_words_key = randomWords(words_list);
+function scrambleWord(word) {
+  if (!word) {
+    displayFinalScore();
+  } else {
+    let charArray = word.split("");
+    let newArray = [];
+    while (charArray.length > 0) {
+      let index = Math.floor(Math.random() * charArray.length);
+      newArray.push(charArray[index]);
+      charArray.splice(index, 1);
+    }
+    return newArray.join("");
+  }
+}
 
-var selected_words = rumbledWords(words_list[random_words_key]);
+// Initialize selected_words, right_words and hint_words with random word
+random_words_key = randomWords(words_list);
+var selected_words = scrambleWord(words_list[random_words_key]);
 var right_words = correct_words_list[random_words_key];
 var hint_words = hint_word_list[random_words_key];
 
+// Submit answer function
 submitAnswer.onclick = function () {
-  var userAnswer = document.getElementById("userAnswer").value.toUpperCase();
+  var userAnswer = inputField.value.toUpperCase();
   if (userAnswer == right_words) {
     totalScore++;
     Swal.fire({
@@ -79,60 +97,47 @@ submitAnswer.onclick = function () {
       allowEscapeKey: false,
       showCancelButton: false
     })
-    // moreInfo.innerHTML = more_info[random_words_key];
-    // rumble_btn.style.display = "none";
-    // submitAnswer.style.display = "none";
   } else {
     shake();
   }
 
-  if (words_count === 0) {
-    Swal.fire({
-      title: `Your total score is ${totalScore}.`,
-      icon: 'info',
-      showCancelButton: true,
-      confirmButtonText: 'Play Again',
-      cancelButtonText: 'Quit',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // Reload the page to play again
-        location.reload();
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        // Redirect to index page if user quits
-        location.href = "index.html";
-      }
-    });
+  // Remove used word from lists and set new random words
+  words_list.splice(random_words_key, 1);
+  correct_words_list.splice(random_words_key, 1);
+  hint_word_list.splice(random_words_key, 1);
+  more_info.splice(random_words_key, 1);
+  words_count--;
+  random_words_key = randomWords(words_list);
+  selected_words = scrambleWord(words_list[random_words_key]);
+  right_words = correct_words_list[random_words_key];
+  hint_words = hint_word_list[random_words_key];
 
-  } else {
-    words_list.splice(random_words_key, 1);
-    correct_words_list.splice(random_words_key, 1);
-    hint_word_list.splice(random_words_key, 1);
-    more_info.splice(random_words_key, 1);
-    words_count--;
-    random_words_key = randomWords(words_list);
-    selected_words = rumbledWords(words_list[random_words_key]);
-    right_words = correct_words_list[random_words_key];
-    hint_words = hint_word_list[random_words_key];
-  }
-
+  // Update HTML elements with new words
   words.innerHTML = selected_words;
   hint.innerHTML = hint_words;
   console.log("Words: " + words_list);
   console.log("Words Count: " + words_count);
   console.log("Score:  " + totalScore);
+
+  // Display final score if all words have been used
+  if (words_count === 0) {
+    displayFinalScore();
+  }
 };
 
+// Scramble word function
 rumble_btn.onclick = function () {
-  selected_words = rumbledWords(selected_words);
+  selected_words = scrambleWord(selected_words);
   if (selected_words == right_words) {
-    selected_words = rumbledWords(selected_words);
+    selected_words = scrambleWord(selected_words);
   }
   words.innerHTML = selected_words;
 };
 
+// Next button function
 next_btn.onclick = function () {
   random_words_key = randomWords(words_list);
-  selected_words = rumbledWords(words_list[random_words_key]);
+  selected_words = scrambleWord(words_list[random_words_key]);
   right_words = correct_words_list[random_words_key];
   hint_words = hint_word_list[random_words_key];
   words.innerHTML = selected_words;
@@ -141,35 +146,8 @@ next_btn.onclick = function () {
   next_btn.innerHTML = "Next";
   rumble_btn.style.display = "block";
   submitAnswer.style.display = "block";
+  // inputField.style.display = "block";
 };
-
-function rumbledWords(words) {
-  if (!words) {
-    Swal.fire({
-      title: `Your total score is ${totalScore}.`,
-      icon: 'info',
-      showCancelButton: true,
-      confirmButtonText: 'Play Again',
-      cancelButtonText: 'Quit',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // Reload the page to play again
-        location.reload();
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        // Redirect to index page if user quits
-        location.href = "index.html";
-      }
-    })
-  }
-  let charArray = words.split("");
-  let newArray = [];
-  while (charArray.length > 0) {
-    let index = Math.floor(Math.random() * charArray.length);
-    newArray.push(charArray[index]);
-    charArray.splice(index, 1);
-  }
-  return newArray.join("");
-}
 
 function shake() {
   words.classList.add("shake");
