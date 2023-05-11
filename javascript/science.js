@@ -52,6 +52,7 @@ const more_info = [
     "Atoms are the building blocks of all matter, and the properties of different materials are determined by the types and arrangements of atoms that they contain. Atoms can combine with each other to form molecules, which are groups of two or more atoms that are chemically bonded together.",
     "Photosynthesis is the process by which green plants, algae, and some bacteria convert light energy from the sun into chemical energy in the form of organic compounds like glucose. This process is critical to the survival of many living organisms, as it produces the oxygen we breathe and is the foundation of the food chain."
 ];
+
 function randomWords() {
     return Math.floor(Math.random() * words_list.length);
 }

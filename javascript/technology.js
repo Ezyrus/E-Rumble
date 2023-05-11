@@ -56,50 +56,82 @@ const more_info = [
 function randomWords() {
     return Math.floor(Math.random() * words_list.length);
 }
-var random_words_key = randomWords();
 
-var selected_words = words_list[random_words_key];
-selected_words = rumbledWords(selected_words);
+var totalScore = 0;
+var words_count = words_list.length;
+var random_words_key = randomWords(words_list);
+
+var selected_words = rumbledWords(words_list[random_words_key]);
+var right_words = correct_words_list[random_words_key];
+var hint_words = hint_word_list[random_words_key];
 
 submitAnswer.onclick = function () {
-    var userAnswer = document.getElementById("userAnswer").value;
-    var rightAnswer = correct_words_list[random_words_key];
-
-    if (userAnswer.toUpperCase() == rightAnswer) {
+    var userAnswer = document.getElementById("userAnswer").value.toUpperCase();
+    if (userAnswer == right_words) {
+        totalScore++;
         moreInfo.innerHTML = more_info[random_words_key];
-    } else {
-        shake();
+        // rumble_btn.style.display = "none";
+        // submitAnswer.style.display = "none";
     }
+
+    if (words_count === 0) {
+        var playAgain = confirm(`Your total score is ${totalScore}. Do you want to play again?`);
+        totalScore = 0;
+        if (playAgain) {
+            location.reload();
+        } else {
+            location.href = "index.html";
+        }
+    } else {
+        words_list.splice(random_words_key, 1);
+        correct_words_list.splice(random_words_key, 1);
+        hint_word_list.splice(random_words_key, 1);
+        more_info.splice(random_words_key, 1);
+        words_count--;
+        random_words_key = randomWords(words_list);
+        selected_words = rumbledWords(words_list[random_words_key]);
+        right_words = correct_words_list[random_words_key];
+        hint_words = hint_word_list[random_words_key];
+    }
+
+    words.innerHTML = selected_words;
+    hint.innerHTML = hint_words;
+    console.log("Words: " + words_list);
+    console.log("Words Count: " + words_count);
+    console.log("Score:  " + totalScore);
 };
 
 rumble_btn.onclick = function () {
-    var right_words = words_list[random_words_key];
     selected_words = rumbledWords(selected_words);
-    var hint_words = hint_word_list[random_words_key];
-
-    rumble_btn.innerHTML = "Rumble Word";
-    next_btn.style.display = "block";
     if (selected_words == right_words) {
         selected_words = rumbledWords(selected_words);
     }
     words.innerHTML = selected_words;
-    hint.innerHTML = hint_words;
 };
 
 next_btn.onclick = function () {
-    random_words_key = randomWords();
-    var right_words = words_list[random_words_key];
-    selected_words = rumbledWords(right_words);
-    var hint_words = hint_word_list[random_words_key];
-    moreInfo.innerHTML = "";
-    if (selected_words == right_words) {
-        selected_words = rumbledWords(selected_words);
-    }
+    random_words_key = randomWords(words_list);
+    selected_words = rumbledWords(words_list[random_words_key]);
+    right_words = correct_words_list[random_words_key];
+    hint_words = hint_word_list[random_words_key];
     words.innerHTML = selected_words;
     hint.innerHTML = hint_words;
+    moreInfo.innerHTML = "";
+    next_btn.innerHTML = "Next";
+    rumble_btn.style.display = "block";
+    submitAnswer.style.display = "block";
 };
 
 function rumbledWords(words) {
+    if (!words) {
+        var playAgain = confirm(`Your total score is ${totalScore}. Do you want to play again?`);
+        totalScore = 0;
+        if (playAgain) {
+            location.reload();
+        } else {
+            location.href = "index.html";
+        }
+    }
     let charArray = words.split("");
     let newArray = [];
     while (charArray.length > 0) {
