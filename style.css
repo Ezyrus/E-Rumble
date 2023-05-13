@@ -1,357 +1,352 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Tomorrow', sans-serif;
-    scroll-behavior: smooth;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: "Tomorrow", sans-serif;
+	scroll-behavior: smooth;
 }
 
 html::-webkit-scrollbar {
-    width: 0;
-  }
+	width: 0;
+}
 
 /* ----- HEADER ----- */
 
 header {
-    font-family: 'Tomorrow', sans-serif;
-    height: 15vh;
-    width: 100%;
-    font-size: 25px;
-    background: rgba(0, 7, 48, 1);
-    box-shadow: 2px 2px 5px rgba(0, 7, 48, 1);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    position: fixed;
+	font-family: "Tomorrow", sans-serif;
+	height: 15vh;
+	width: 100%;
+	font-size: 25px;
+	background: rgba(0, 7, 48, 1);
+	box-shadow: 2px 2px 5px rgba(0, 7, 48, 1);
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	position: fixed;
 }
 
 header .logo {
-    height: 100%;
-    width: 60%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+	height: 100%;
+	width: 60%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
 }
 
 header .logo h3 {
-    text-transform: uppercase;
-    letter-spacing: 3px;
+	text-transform: uppercase;
+	letter-spacing: 3px;
 }
 
 header .logo h3 a {
-    color: cyan;
-    text-decoration: none;
+	color: cyan;
+	text-decoration: none;
 }
 
 header .links {
-    height: 100%;
-    width: 40%;
-    list-style-type: none;
-    text-transform: uppercase;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
+	height: 100%;
+	width: 40%;
+	list-style-type: none;
+	text-transform: uppercase;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
 }
 
 header .links h4 a {
-    color: white;
-    text-decoration: none;
-    letter-spacing: 3px;
+	color: white;
+	text-decoration: none;
+	letter-spacing: 3px;
 }
 
 header div:hover {
-    font-size: larger;
-    transition: 0.3s;
-    cursor: pointer;
+	font-size: larger;
+	transition: 0.3s;
+	cursor: pointer;
 }
 /* ----- HEADER ----- */
 
-section.home-container  {    
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 7, 48, 1);
+section.home-container {
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(0, 7, 48, 1);
 }
 
 .typing::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 2px;
-    height: 100%;
-    animation: cursorBlink 0.8s steps(3) infinite;
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 2px;
+	height: 100%;
+	animation: cursorBlink 0.8s steps(3) infinite;
 }
 
 @keyframes cursorBlink {
+	0%,
+	75% {
+		opacity: 1;
+	}
 
-    0%,
-    75% {
-        opacity: 1;
-    }
-
-    76%,
-    100% {
-        opacity: 0;
-    }
+	76%,
+	100% {
+		opacity: 0;
+	}
 }
 
 .typing {
-    position: relative;
-    -webkit-box-reflect: below 5px linear-gradient(transparent, #3333);
+	position: relative;
+	-webkit-box-reflect: below 5px linear-gradient(transparent, #3333);
 }
 
 .typing h2 {
-    font-family: 'Tomorrow', sans-serif;
-    font-weight: 100;
-    position: relative;
-    color: white;
-    letter-spacing: 5px;
-    font-size: 4rem;
-    overflow: hidden;
-    margin-bottom: 0;
-    animation: type 5s steps(11) infinite;
+	font-family: "Tomorrow", sans-serif;
+	font-weight: 100;
+	position: relative;
+	color: white;
+	letter-spacing: 5px;
+	font-size: 4rem;
+	overflow: hidden;
+	margin-bottom: 0;
+	animation: type 5s steps(11) infinite;
 }
 
 .typing h2 span {
-    
-    color:  cyan;
-    font-size: 90px;
+	color: cyan;
+	font-size: 90px;
 }
 
 @keyframes type {
+	0%,
+	100% {
+		width: 0px;
+	}
 
-    0%,
-    100% {
-        width: 0px;
-    }
-
-    30%,
-    60% {
-        width: 350px;
-    }
+	30%,
+	60% {
+		width: 350px;
+	}
 }
 
-@media(max-width: 330px) {
-    .typing h2 {
-        font-size: 3rem;
-        animation: type 5s steps(10) infinite;
-    }
+@media (max-width: 330px) {
+	.typing h2 {
+		font-size: 3rem;
+		animation: type 5s steps(10) infinite;
+	}
 
-    @keyframes type {
+	@keyframes type {
+		0%,
+		100% {
+			width: 0px;
+		}
 
-        0%,
-        100% {
-            width: 0px;
-        }
-
-        30%,
-        60% {
-            width: 305px;
-        }
-    }
+		30%,
+		60% {
+			width: 305px;
+		}
+	}
 }
 
 section.play-here-container {
-    height: 100vh;
-    width: 100%;
-    box-shadow: -2px -2px 5px  rgb(72, 218, 255);
-    background: rgb(72, 218, 255);
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    color: white;
+	height: 100vh;
+	width: 100%;
+	box-shadow: -2px -2px 5px rgb(72, 218, 255);
+	background: rgb(72, 218, 255);
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	color: white;
 }
 
 section.play-here-container h1 {
-    font-size: 40px;
-    margin-bottom: 5vh;
-    letter-spacing: 1px;
+	font-size: 40px;
+	margin-bottom: 5vh;
+	letter-spacing: 1px;
 }
 
 section.play-here-container h2 {
-    font-size: 30px;
-    letter-spacing: 3px;
+	font-size: 30px;
+	letter-spacing: 3px;
 }
 
-section.play-here-container h1 span{
-    color: rgba(0, 7, 48, 1);
-    font-size: 45px;
-    letter-spacing: 3px;
+section.play-here-container h1 span {
+	color: rgba(0, 7, 48, 1);
+	font-size: 45px;
+	letter-spacing: 3px;
 }
 
 section.play-here-container .inputSubmit {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    width: 90%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	width: 90%;
 }
 
-section.play-here-container .inputSubmit button{
-    font-size: 20px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    padding: 10px;
-    border: 0px solid black;
-    border-radius: 5px;
+section.play-here-container .inputSubmit button {
+	font-size: 20px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	padding: 10px;
+	border: 0px solid black;
+	border-radius: 5px;
 }
 
-section.play-here-container .inputSubmit button:hover{
-    transform: scale(1.2);
-    transition: 0.2s;
-    background-color: green;
-    color: white;
-    cursor: pointer;
+section.play-here-container .inputSubmit button:hover {
+	transform: scale(1.2);
+	transition: 0.2s;
+	background-color: green;
+	color: white;
+	cursor: pointer;
 }
 
 section.play-here-container p {
-    padding: 10px;
+	padding: 10px;
 }
 
 section.play-here-container p a {
-    letter-spacing: 3px;
-    font-size: 20px;
-    text-decoration: none;
-    text-transform: uppercase;
-    color: white;
+	letter-spacing: 3px;
+	font-size: 20px;
+	text-decoration: none;
+	text-transform: uppercase;
+	color: white;
 }
 
 section.play-here-container p:hover {
-    transform: scale(1.5);
-    transition: 0.2s;
+	transform: scale(1.5);
+	transition: 0.2s;
 }
-
 
 section.play-here-container a:hover {
-    transform: scale(1.5);
-    color: rgba(0, 7, 48, 1);
-    transition: 0.2s;
+	transform: scale(1.5);
+	color: rgba(0, 7, 48, 1);
+	transition: 0.2s;
 }
 
-section.play-here-container input{
-    border: 0;
-    border-radius: 5px;
-    padding: 20px;
-    margin: 10px;
-    width: 30%;
-    letter-spacing: 1px;
-    font-size: 15px;
-    display: none;
-    /* text-transform: capitalize; */
+section.play-here-container input {
+	border: 0;
+	border-radius: 5px;
+	padding: 20px;
+	margin: 10px;
+	width: 30%;
+	letter-spacing: 1px;
+	font-size: 15px;
+	display: none;
+	/* text-transform: capitalize; */
 }
 
-section.play-here-container .buttons{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    width: 50%;
-    gap: 30px;
+section.play-here-container .buttons {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	width: 50%;
+	gap: 30px;
 }
 
-section.play-here-container .buttons button{
-    background-color: antiquewhite;
-    font-size: 20px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    padding: 10px;
-    border: 0px solid black;
-    border-radius: 5px;
+section.play-here-container .buttons button {
+	background-color: antiquewhite;
+	font-size: 20px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	padding: 10px;
+	border: 0px solid black;
+	border-radius: 5px;
 }
 
-section.play-here-container .buttons .next{
-    display: block;
+section.play-here-container .buttons .next {
+	display: block;
 }
 
-section.play-here-container .buttons .rumbleWord{
-    display: none;
+section.play-here-container .buttons .rumbleWord {
+	display: none;
 }
 
-section.play-here-container .inputSubmit .submitAnswer{
-    display: none;
+section.play-here-container .inputSubmit .submitAnswer {
+	display: none;
 }
 
-section.play-here-container .inputSubmit .userAnswer{
-    background-color: antiquewhite;
-    display: block;
+section.play-here-container .inputSubmit .userAnswer {
+	background-color: antiquewhite;
+	display: none;
 }
 
-section.play-here-container .buttons button:hover{
-    transform: scale(1.1);
-    transition: 0.2s;
-    background-color: green;
-    color: white;
-    cursor: pointer;
+section.play-here-container .buttons button:hover {
+	transform: scale(1.1);
+	transition: 0.2s;
+	background-color: green;
+	color: white;
+	cursor: pointer;
 }
 
 section.play-here-container .information {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 90%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 90%;
 }
 
 section.play-here-container .hint {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    color: rgb(255, 0, 157);
-    letter-spacing: 1px;
-    font-size: 20px;
-    font-style: italic;
+	font-family: "Poppins", sans-serif;
+	font-weight: 600;
+	color: rgb(255, 0, 157);
+	letter-spacing: 1px;
+	font-size: 20px;
+	font-style: italic;
 }
 
 section.play-here-container .moreInfo {
-    font-family: 'Poppins', sans-serif;
-    letter-spacing: 0.5px;
-    font-size: 20px;
-    color: rgb(0, 0, 0)
+	font-family: "Poppins", sans-serif;
+	letter-spacing: 0.5px;
+	font-size: 20px;
+	color: rgb(0, 0, 0);
 }
 
 section.play-here-container .moreInfo::first-letter {
-    font-size: 50px;
-    padding-right: 2px;
-    font-weight: 500;
+	font-size: 50px;
+	padding-right: 2px;
+	font-weight: 500;
 }
 
 section.play-here-container .moreInfo:hover {
-    transform: scale(1);
+	transform: scale(1);
 }
 
 section.play-here-container .hint:hover {
-    transform: scale(1);
+	transform: scale(1);
 }
 
 .shake {
-    animation: shake 0.5s ease-in-out;
-    color: red;
-  }
-  
-  @keyframes shake {
-    0% {
-      transform: translateX(0);
-    }
-    20% {
-      transform: translateX(-10px);
-    }
-    40% {
-      transform: translateX(10px);
-    }
-    60% {
-      transform: translateX(-10px);
-    }
-    80% {
-      transform: translateX(10px);
-    }
-    100% {
-      transform: translateX(0);
-    }
-  }
+	animation: shake 0.5s ease-in-out;
+	color: red;
+}
+
+@keyframes shake {
+	0% {
+		transform: translateX(0);
+	}
+	20% {
+		transform: translateX(-10px);
+	}
+	40% {
+		transform: translateX(10px);
+	}
+	60% {
+		transform: translateX(-10px);
+	}
+	80% {
+		transform: translateX(10px);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}
 
 /*   Category Styles  */

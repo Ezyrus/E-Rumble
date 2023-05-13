@@ -57,97 +57,139 @@ const more_info = [
 var totalScore = 0;
 var words_count = words_list.length;
 var random_words_key;
+var word_no = 1
+var right_answers = [];
 
 function randomWords() {
   return Math.floor(Math.random() * words_list.length);
 }
 
-function scrambleWord(word) {
-  if (!word) {
-    displayFinalScore();
-  } else {
-    let charArray = word.split("");
-    let newArray = [];
-    while (charArray.length > 0) {
-      let index = Math.floor(Math.random() * charArray.length);
-      newArray.push(charArray[index]);
-      charArray.splice(index, 1);
-    }
-    return newArray.join("");
-  }
-}
-
-// Initialize selected_words, right_words and hint_words with random word
 random_words_key = randomWords(words_list);
 var selected_words = scrambleWord(words_list[random_words_key]);
 var right_words = correct_words_list[random_words_key];
 var hint_words = hint_word_list[random_words_key];
 
-// Submit answer function
 submitAnswer.onclick = function () {
   var userAnswer = inputField.value.toUpperCase();
-  if (userAnswer == right_words) {
+  var isLastWord = words_count === 1;
+  word_no++;
+  if (userAnswer === right_words) {
     totalScore++;
+    right_answers.push({
+      word: words_list[random_words_key],
+      more_info: more_info[random_words_key]
+    });
     Swal.fire({
       title: correct_words_list[random_words_key],
       text: more_info[random_words_key],
       icon: 'question',
-      confirmButtonText: 'Continue',
+      confirmButtonText: isLastWord ? 'Finish' : 'Continue',
       allowOutsideClick: false,
       allowEscapeKey: false,
       showCancelButton: false
-    })
+    }).then(() => {
+
+      words_list.splice(random_words_key, 1);
+      correct_words_list.splice(random_words_key, 1);
+      hint_word_list.splice(random_words_key, 1);
+      more_info.splice(random_words_key, 1);
+      words_count--;
+      if (!isLastWord) {
+        random_words_key = randomWords(words_list);
+        selected_words = scrambleWord(words_list[random_words_key]);
+        right_words = correct_words_list[random_words_key];
+        hint_words = hint_word_list[random_words_key];
+
+        words.innerHTML = word_no + ". " + selected_words;
+        hint.innerHTML = hint_words;
+      } else {
+        displayFinalScore();
+      }
+    });
   } else {
     shake();
+    if (!isLastWord) {
+
+      words_list.splice(random_words_key, 1);
+      correct_words_list.splice(random_words_key, 1);
+      hint_word_list.splice(random_words_key, 1);
+      more_info.splice(random_words_key, 1);
+      words_count--;
+      random_words_key = randomWords(words_list);
+      selected_words = scrambleWord(words_list[random_words_key]);
+      right_words = correct_words_list[random_words_key];
+      hint_words = hint_word_list[random_words_key];
+
+      words.innerHTML = word_no + ". " + selected_words;
+      hint.innerHTML = hint_words;
+      console.log("random_words_key: " + selected_words)
+      console.log("selected_words: " + selected_words);
+      console.log("Words: " + words_list);
+      console.log("Words Count: " + words_count);
+      console.log("Score:  " + totalScore);
+    } else {
+      displayFinalScore();
+    }
   }
-
-  // Remove used word from lists and set new random words
-  words_list.splice(random_words_key, 1);
-  correct_words_list.splice(random_words_key, 1);
-  hint_word_list.splice(random_words_key, 1);
-  more_info.splice(random_words_key, 1);
-  words_count--;
-  random_words_key = randomWords(words_list);
-  selected_words = scrambleWord(words_list[random_words_key]);
-  right_words = correct_words_list[random_words_key];
-  hint_words = hint_word_list[random_words_key];
-
-  // Update HTML elements with new words
-  words.innerHTML = selected_words;
-  hint.innerHTML = hint_words;
-  console.log("Words: " + words_list);
-  console.log("Words Count: " + words_count);
-  console.log("Score:  " + totalScore);
-
-  // Display final score if all words have been used
-  if (words_count === 0) {
-    displayFinalScore();
-  }
+  inputField.value = "";
 };
 
-// Scramble word function
 rumble_btn.onclick = function () {
   selected_words = scrambleWord(selected_words);
   if (selected_words == right_words) {
     selected_words = scrambleWord(selected_words);
   }
-  words.innerHTML = selected_words;
+  words.innerHTML = word_no + ". " + selected_words;
 };
 
-// Next button function
 next_btn.onclick = function () {
   random_words_key = randomWords(words_list);
   selected_words = scrambleWord(words_list[random_words_key]);
   right_words = correct_words_list[random_words_key];
   hint_words = hint_word_list[random_words_key];
-  words.innerHTML = selected_words;
+  words.innerHTML = word_no + ". " + selected_words;
   hint.innerHTML = hint_words;
   moreInfo.innerHTML = "";
   next_btn.innerHTML = "Next";
   rumble_btn.style.display = "block";
   submitAnswer.style.display = "block";
-  // inputField.style.display = "block";
+  inputField.style.display = "block";
 };
+
+function displayFinalScore() {
+  Swal.fire({
+    title: `Game Over!`,
+    html: 'Your final score is: ' + totalScore + '<br><br>' +
+      right_answers.map(answer => '<b>' + answer.word + '</b> - ' + answer.more_info).join('<br><br>'),
+    icon: 'info',
+    showCancelButton: true,
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    confirmButtonText: 'Play Again',
+    cancelButtonText: 'Quit',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      location.reload();
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+      location.href = "index.html";
+    }
+  });
+}
+
+function scrambleWord(word) {
+  if (word == null || word.trim() === '') {
+    displayFinalScore();
+    return null;
+  }
+  let charArray = word.split("");
+  let newArray = [];
+  while (charArray.length > 0) {
+    let index = Math.floor(Math.random() * charArray.length);
+    newArray.push(charArray[index]);
+    charArray.splice(index, 1);
+  }
+  return newArray.join("");
+}
 
 function shake() {
   words.classList.add("shake");
